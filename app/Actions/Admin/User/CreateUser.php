@@ -18,7 +18,6 @@ class CreateUser
 
         $roles = $request->roles ?? [];
         $user->assignRole($roles);
-
         return $user;
     }
 }

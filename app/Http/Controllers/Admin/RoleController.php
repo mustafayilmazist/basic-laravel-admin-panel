@@ -25,12 +25,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = (new Role)->newQuery();
-
+        $roles = Role::all();
+        /*$roles = (new Role)->newQuery();
         if (request()->has('search')) {
             $roles->where('name', 'Like', '%'.request()->input('search').'%');
         }
-
         if (request()->query('sort')) {
             $attribute = request()->query('sort');
             $sort_order = 'ASC';
@@ -42,9 +41,7 @@ class RoleController extends Controller
         } else {
             $roles->latest();
         }
-
-        $roles = $roles->paginate(5)->onEachSide(2);
-
+        $roles = $roles->paginate(5)->onEachSide(2);*/
         return view('admin.role.index', compact('roles'));
     }
 
@@ -56,7 +53,6 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-
         return view('admin.role.create', compact('permissions'));
     }
 
@@ -102,7 +98,6 @@ class RoleController extends Controller
     {
         $permissions = Permission::all();
         $roleHasPermissions = array_column(json_decode($role->permissions, true), 'id');
-
         return view('admin.role.edit', compact('role', 'permissions', 'roleHasPermissions'));
     }
 

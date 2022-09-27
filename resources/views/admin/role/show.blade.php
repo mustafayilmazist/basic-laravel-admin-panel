@@ -1,48 +1,64 @@
-<x-admin.wrapper>
-    <x-slot name="title">
-            {{ __('Roles') }}
-    </x-slot>
+@extends('layouts.app')
+@section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <h5>{{ __('Roles') }}</h5>
+            </div>
+        </div>
+        <div class="col-lg-12">
 
-    <div class="d-print-none with-border">
-        <x-admin.breadcrumb href="{{route('role.index')}}" title="{{ __('View role') }}">{{ __('<< Back to all roles') }}</x-admin.breadcrumb> 
-    </div>
-    <div class="w-full py-2">
-        <div class="min-w-full border-b border-gray-200 shadow">
-            <table class="table-fixed w-full text-sm">
-                <tbody class="bg-white dark:bg-slate-800">
+            <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="{{ route('role.create') }}" class="btn btn-info">{{ __('Add Role') }}</a>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <a href="{{ route('role.index') }}" title="{{ __('Back to all roles') }}">
+                                {{ __('Back to all roles') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+
+                <table id="" class="table table-striped table-bordered data_table" style="width:100%">
+                    <tbody>
                     <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Name') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{$role->name}}</td>
+                        <td class="">{{ __('Name') }}</td>
+                        <td class="">{{$role->name}}</td>
                     </tr>
                     <tr>
-                    @unless ($role->name == env('APP_SUPER_ADMIN', 'super-admin'))
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Permissions') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-
-                        <div class="py-2">
-                            <div class="grid grid-cols-4 gap-4">
-                                @forelse ($permissions as $permission)
-                                    <div class="col-span-4 sm:col-span-2 md:col-span-2">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} disabled="disabled" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                            {{ $permission->name }}
-                                        </label>
-                                    </div>
-                                @empty
-                                    ----
-                                @endforelse
-                            </div>
-                        </div>
-                        </td>
+                        @unless ($role->name == env('APP_SUPER_ADMIN', 'super-admin'))
+                            <td class="">{{ __('Permissions') }}</td>
+                            <td class="">
+                                <div class="">
+                                    @forelse ($permissions as $permission)
+                                        <div class="">
+                                            <label class="form-check-label">
+                                                <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" {{ in_array($permission->id, $roleHasPermissions) ? 'checked' : '' }} disabled="disabled" class="">
+                                                {{ $permission->name }}
+                                            </label>
+                                        </div>
+                                    @empty
+                                        ----
+                                    @endforelse
+                                </div>
+                            </td>
                     </tr>
                     @endunless
                     <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Created') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{$role->created_at}}</td>
+                        <td class="">{{ __('Created') }}</td>
+                        <td class="">{{$role->created_at}}</td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+
+
+            </div>
         </div>
     </div>
-</x-admin.wrapper>
-
+@endsection

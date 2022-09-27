@@ -21,6 +21,7 @@ class UserController extends Controller
         $this->middleware('can:user create', ['only' => ['create', 'store']]);
         $this->middleware('can:user edit', ['only' => ['edit', 'update']]);
         $this->middleware('can:user delete', ['only' => ['destroy']]);
+
     }
 
     /**
@@ -30,12 +31,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = (new User)->newQuery();
 
+        $users = User::all();
+        /*$users = (new User)->newQuery();
         if (request()->has('search')) {
             $users->where('name', 'Like', '%'.request()->input('search').'%');
         }
-
         if (request()->query('sort')) {
             $attribute = request()->query('sort');
             $sort_order = 'ASC';
@@ -47,9 +48,7 @@ class UserController extends Controller
         } else {
             $users->latest();
         }
-
-        $users = $users->paginate(5)->onEachSide(2);
-
+        $users = $users->paginate(5)->onEachSide(2);*/
         return view('admin.user.index', compact('users'));
     }
 
@@ -61,7 +60,6 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-
         return view('admin.user.create', compact('roles'));
     }
 
@@ -75,9 +73,8 @@ class UserController extends Controller
     public function store(StoreUserRequest $request, CreateUser $createUser)
     {
         $createUser->handle($request);
-
         return redirect()->route('user.index')
-                        ->with('message', __('User created successfully.'));
+                        ->with('success', __('User created successfully.'));
     }
 
     /**
@@ -90,7 +87,6 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $userHasRoles = array_column(json_decode($user->roles, true), 'id');
-
         return view('admin.user.show', compact('user', 'roles', 'userHasRoles'));
     }
 
@@ -104,7 +100,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $userHasRoles = array_column(json_decode($user->roles, true), 'id');
-
+        /*dd($userHasRoles);*/
         return view('admin.user.edit', compact('user', 'roles', 'userHasRoles'));
     }
 
@@ -119,9 +115,8 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user, UpdateUser $updateUser)
     {
         $updateUser->handle($request, $user);
-
         return redirect()->route('user.index')
-                        ->with('message', __('User updated successfully.'));
+                        ->with('success', __('User updated successfully.'));
     }
 
     /**
@@ -133,9 +128,8 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-
         return redirect()->route('user.index')
-                        ->with('message', __('User deleted successfully'));
+                        ->with('success', __('User deleted successfully'));
     }
 
     /**
@@ -144,7 +138,6 @@ class UserController extends Controller
     public function accountInfo()
     {
         $user = \Auth::user();
-
         return view('admin.user.account_info', compact('user'));
     }
 

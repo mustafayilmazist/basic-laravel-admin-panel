@@ -1,49 +1,84 @@
-<x-admin.wrapper>
-    <x-slot name="title">
-            {{ __('Users') }}
-    </x-slot>
+@extends('layouts.app')
+@section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <h5>{{ __('My Account') }}</h5>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <form method="POST" action="{{ route('admin.account.info.store') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name"
+                            class="{{ $errors->account->has('name') ? ' text-red-400' : '' }}">{{ __('Name') }}</label>
+                        <input id="name"
+                            class="form-control{{ $errors->account->has('name') ? ' border-red-400' : '' }}" type="text"
+                            name="name" value="{{ old('name', $user->name) }}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email"
+                            class="{{ $errors->account->has('email') ? ' text-red-400' : '' }}">{{ __('Email') }}</label>
 
-    <div class="d-print-none with-border">
-        <x-admin.breadcrumb href="{{route('user.index')}}" title="{{ __('View user') }}">{{ __('<< Back to all users') }}</x-admin.breadcrumb> 
-    </div>
-    <div class="w-full py-2">
-        <div class="min-w-full border-b border-gray-200 shadow">
-            <table class="table-fixed w-full text-sm">
-                <tbody class="bg-white dark:bg-slate-800">
-                    <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Name') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{$user->name}}</td>
-                    </tr>
-                    <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Email') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{$user->email}}</td>
-                    </tr>
-                    <tr>
-                    <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Roles') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
+                        <input id="email"
+                            class="form-control{{ $errors->account->has('email') ? ' border-red-400' : '' }}"
+                            type="email" name="email" value="{{ old('email', $user->email) }}" />
+                    </div>
 
-                        <div class="py-2">
-                            <div class="grid grid-cols-4 gap-4">
-                                @forelse ($roles as $role)
-                                    <div class="col-span-4 sm:col-span-2 md:col-span-2">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" name="roles[]" value="{{ $role->name }}" {{ in_array($role->id, $userHasRoles) ? 'checked' : '' }} disabled="disabled" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                            {{ $role->name }}
-                                        </label>
-                                    </div>
-                                @empty
-                                    ----
-                                @endforelse
-                            </div>
-                        </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Created') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{$user->created_at}}</td>
-                    </tr>
-                </tbody>
-            </table>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">
+                            {{ __('Update') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</x-admin.wrapper>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <h5>{{ __('Change Password') }}</h5>
+            </div>
+        </div>
+        <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <form method="POST" action="{{ route('admin.account.password.store') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="old_password"
+                                class="{{ $errors->password->has('old_password') ? ' text-red-400' : '' }}">{{ __('Old Password') }}</label>
+
+                            <input id="old_password"
+                                class="form-control{{ $errors->password->has('old_password') ? ' border-red-400' : '' }}"
+                                type="password" name="old_password" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new_password"
+                                class="{{ $errors->password->has('new_password') ? ' text-red-400' : '' }}">{{ __('New Password') }}</label>
+
+                            <input id="new_password"
+                                class="form-control{{ $errors->password->has('new_password') ? ' border-red-400' : '' }}"
+                                type="password" name="new_password" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm_password"
+                                class="{{ $errors->password->has('confirm_password') ? ' text-red-400' : '' }}">{{ __('Confirm password') }}</label>
+
+                            <input id="confirm_password"
+                                class="form-control{{ $errors->password->has('confirm_password') ? ' border-red-400' : '' }}"
+                                type="password" name="confirm_password" />
+                        </div>
+
+                        <div class="form-group">
+                            <button type='submit' class='btn btn-success'>
+                                {{ __('Change Password') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+@endsection

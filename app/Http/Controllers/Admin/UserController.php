@@ -31,6 +31,10 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        /*if(auth()->user()->hasRole('admin'))
+        {pr("var");}
+        var_dump(auth()->user()->hasRole('super-admin'));*/
         /*echo auth()->user()->getRoleNames()[0];// Returns a collection);
         echo auth()->user()->roles->pluck('name')[0];*/
         $users = User::all();

@@ -19,6 +19,7 @@
                             <th>#</th>
                             <th th style="width: 300px;">Ad</th>
                             <th th style="width: 300px;">Email</th>
+                            <th th style="width: 200px;">Rol</th>
                             @canany(['user edit', 'user delete'])
                             <th class="text-right">İşlemler</th>
                             @endcanany
@@ -33,6 +34,9 @@
                                 </td>
                                 <td>
                                     {{ $user->email }}
+                                </td>
+                                <td>
+                                    {{ $user->roles->pluck('name')->implode(', ') }}
                                 </td>
                                 @canany(['user edit', 'user delete'])
                                 <td class="text-right">

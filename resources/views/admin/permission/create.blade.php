@@ -14,7 +14,7 @@
 
                     </div>
                     <div class="col-lg-6 text-right">
-                        <a href="{{ route('permission.index') }}" title="{{ __('View permission') }}">
+                        <a href="{{ route('permission.index') }}" title="{{ __('-View permission') }}">
                             {{ __('Back to all permissions') }}
                         </a>
                     </div>

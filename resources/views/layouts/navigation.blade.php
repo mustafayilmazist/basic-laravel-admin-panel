@@ -27,9 +27,25 @@
                     {{ Auth::user()->name }}
                 </a>
                 <div class="dropdown-menu">
-                    <a h class="dropdown-item" href="javascript:void(0);">{{ Auth::user()->email }}</a>
+                    <a class="dropdown-item" href="javascript:void(0);">{{ Auth::user()->email }}</a>
                     <a class="dropdown-item" href="{{ route('admin.account.info') }}">{{ __('My Account') }}</a>
-                    <a class="dropdown-item" href="{{ route('logout') }}">{{ __('Log Out') }}</a>
+
+
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa-power-off"></i>Çıkış yap
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+
+
+
+                    {{--<form method="post" action="{{ route('logout') }}">
+                        @csrf
+                        <a class="dropdown-item" href="{{ route('logout') }}">{{ __('Log Out') }}</a>
+                    </form>--}}
+
                 </div>
             </li>
         </ul>

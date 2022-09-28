@@ -1,9 +1,15 @@
 <?php
 
+/*** admin route group */
+/** middleware yazılımı tarafından korunan grup */
+/*Route::group(["middleware" => ["auth"]], function () {
+
+    Route::group(["middleware" => ["check-role:admin|master_admin"]], function () {*/
+
 Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'prefix' => 'admin',
-    'middleware' => ['auth', 'verified'],
+    'middleware' => ['auth', 'verified',"check-role:admin|super-admin"],
 ], function () {
     Route::resource('user', 'UserController');
     Route::resource('role', 'RoleController');

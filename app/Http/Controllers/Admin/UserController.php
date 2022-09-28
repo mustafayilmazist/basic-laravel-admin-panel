@@ -31,8 +31,13 @@ class UserController extends Controller
      */
     public function index()
     {
-
+        /*echo auth()->user()->getRoleNames()[0];// Returns a collection);
+        echo auth()->user()->roles->pluck('name')[0];*/
         $users = User::all();
+        /*var_dump(auth()->user()->can('edit articles'));
+        var_dump(auth()->user()->can('role list'));
+        var_dump(auth()->user()->hasPermissionTo('edit articles'));
+        var_dump(auth()->user()->hasPermissionTo('role list'));*/
         /*$users = (new User)->newQuery();
         if (request()->has('search')) {
             $users->where('name', 'Like', '%'.request()->input('search').'%');

@@ -1,25 +1,45 @@
-<x-admin.wrapper>
-    <x-slot name="title">
-            {{ __('Permissions') }}
-    </x-slot>
+@extends('layouts.app')
+@section('content')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-12">
+                <h5>{{ __('Permissions') }}</h5>
+            </div>
+        </div>
+        <div class="col-lg-12">
 
-    <div class="d-print-none with-border">
-        <x-admin.breadcrumb href="{{route('permission.index')}}" title="{{ __('View permission') }}">{{ __('<< Back to all permissions') }}</x-admin.breadcrumb> 
-    </div>
-    <div class="w-full py-2">
-        <div class="min-w-full border-b border-gray-200 shadow">
-            <table class="table-fixed w-full text-sm">
-                <tbody class="bg-white dark:bg-slate-800">
+            <div class="col-lg-12">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <a href="{{ route('permission.create') }}" class="btn btn-info">{{ __('Add Permission') }}</a>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            <a href="{{ route('permission.index') }}" title="{{ __('View permission') }}">
+                                {{ __('Back to all permissions') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+
+                <table id="" class="table table-striped table-bordered data_table" style="width:100%">
+                    <tbody>
                     <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Name') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{$permission->name}}</td>
+                        <td class="">{{ __('Name') }}</td>
+                        <td class="">{{$permission->name}}</td>
                     </tr>
                     <tr>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ __('Created') }}</td>
-                        <td class="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{$permission->created_at}}</td>
+                        <td class="">{{ __('Created') }}</td>
+                        <td class="">{{$permission->created_at}}</td>
                     </tr>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+
+
+            </div>
         </div>
     </div>
-</x-admin.wrapper>
+@endsection

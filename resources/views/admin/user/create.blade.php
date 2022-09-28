@@ -15,27 +15,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12" id="alert_box">
-{{--            @if (session()->has('account_message'))--}}
-{{--                <div class="alert alert-success">--}}
-{{--                    {{ session()->get('account_message') }}--}}
-{{--                </div><br />--}}
-{{--            @endif--}}
-{{--            @if (session()->has('account_message'))--}}
-{{--                <div class="alert alert-danger">--}}
-{{--                    {{ session()->get('account_message') }}--}}
-{{--                </div><br />--}}
-{{--            @endif--}}
-{{--            @if ($errors->any())--}}
-{{--                <div class="alert alert-danger">--}}
-{{--                    <ul>--}}
-{{--                        @foreach ($errors->account->al  l() as $error)--}}
-{{--                            <li>{{ $error }}</li>--}}
-{{--                        @endforeach--}}
-{{--                    </ul>--}}
-{{--                </div><br />--}}
-{{--            @endif--}}
-        </div>
         <div class="col-lg-12">
             <div class="col-lg-12">
                 <form method="POST" action="{{ route('user.store') }}">

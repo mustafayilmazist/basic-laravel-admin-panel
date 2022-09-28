@@ -24,7 +24,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = (new Permission)->newQuery();
+        $permissions = Permission::all();
+        /*$permissions = (new Permission)->newQuery();
 
         if (request()->has('search')) {
             $permissions->where('name', 'Like', '%'.request()->input('search').'%');
@@ -42,7 +43,7 @@ class PermissionController extends Controller
             $permissions->latest();
         }
 
-        $permissions = $permissions->paginate(5)->onEachSide(2);
+        $permissions = $permissions->paginate(5)->onEachSide(2);*/
 
         return view('admin.permission.index', compact('permissions'));
     }

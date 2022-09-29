@@ -19,6 +19,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('user.index') }}">{{ __('Users') }}</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('customyetkikontrol.index') }}">Özel Yetki Kontrol</a>
+            </li>
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
